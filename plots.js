@@ -90,3 +90,82 @@ var layout = {
 };
 
 Plotly.newPlot("plotArea", data, layout);
+
+// 12.2.1 Functional JavaScript
+
+// map() transformation
+var numbers = [1, 2, 3, 4, 5]
+var doubled = numbers.map(function (num) {
+	return num * 2;
+});
+doubled
+
+// Skill Drill: Add 5 to each number in the following array
+var numbers = [0, 2, 4, 6, 8]
+var add5 = numbers.map(function (hi) {
+	return hi + 5;
+});
+add5
+
+// map() transformation 2
+var cities = [
+	{
+		"Rank": 1,
+		"City": "San Antonio",
+		"State": "Texas",
+		"Increase_from_2016": "24208",
+		"population": "1511946"
+	},
+	{
+		"Rank": 2,
+		"City": "Phoenix",
+		"State": "Arizona",
+		"Increase_from_2016": "24036",
+		"population": "1626078"
+	},
+	{
+		"Rank": 3,
+		"City": "Dallas",
+		"State": "Texas",
+		"Increase_from_2016": "18935",
+		"population": "1341075"
+	}
+];
+
+var cityNames = cities.map(function (city) {
+	return city.City;
+});
+console.log(cityNames);
+
+// Skill Drill: Modify code to extract population of each city
+
+var cityPop = cities.map(function (city) {
+	return city.population;
+});
+console.log(cityPop);
+
+// The filter() Method
+var numbers = [1, 2, 3, 4, 5];
+
+var larger = numbers.filter(function (num) {
+	return num > 1;
+});
+
+console.log(larger);
+
+// filter() example 2:
+var familyAge = [2, 3, 39, 37, 9];
+
+var olderThanFive = familyAge.filter(function (age) {
+	return age > 5;
+});
+
+console.log(olderThanFive);
+
+// Skill Drill: Filter results to include only animals whose species name starts with letter "s"
+var words = ['seal', 'dog', 'scorpion', 'orangutan', 'salamander'];
+
+var letterS = words.filter(function (word) {
+	return /^s/.test(word);
+});
+console.log(letterS);
