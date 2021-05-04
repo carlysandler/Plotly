@@ -169,3 +169,33 @@ var letterS = words.filter(function (word) {
 	return /^s/.test(word);
 });
 console.log(letterS);
+
+// Arrow Fuctions 1
+var numbers = [1, 2, 3, 4, 5];
+
+var doubled = numbers.map(num => num * 2);
+console.log(doubled);
+
+// example 2:
+var familyAge = [3, 2, 39, 37, 9];
+
+var olderThanFive = familyAge.filter(age => age > 5);
+console.log(olderThanFive);
+
+// example 3:
+var familyAge = [3, 2, 39, 27, 9];
+var sortedAge = familyAge.sort((a, b) => a - b);
+console.log(sortedAge);
+
+// The slice() Method - display certain number of results
+var integers = [0, 1, 2, 3, 4, 5];
+var slice1 = intergers.slice(0, 2);
+
+// Skill Drill:
+var words = ['seal', 'dog', 'scorpion', 'orangutan', 'salamander'];
+words.slice(0, 3);
+// ['seal', 'dog', 'scorpion']
+words.slice(3,);
+// ['orangutan', 'salamander']
+
+
