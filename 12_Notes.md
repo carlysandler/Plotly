@@ -570,3 +570,437 @@ Well done!
 
 SKILL DRILL
 Use the same dataset to create a bar chart of the seven largest cities by population.
+
+# 12.3.1
+Inspect an API call with D3.json()
+Roza is gaining proficiency with Plotly and with JavaScript. She can create various types of graphs in Plotly, as well as perform powerful data manipulation operations with JavaScript, such as filtering, sorting, and mapping.
+
+The belly button data exists in JSON format. In order to be able to visualize it with Plotly, she must be able to read the data into her script file. She will use the D3.js library to do this. While D3 is primarily a data visualization library, its d3.json() method will allow Roza to read external JSON files, as well as place calls to external web APIs for data.
+
+Roza will gain familiarity with using d3.json() by first placing an API call to SpaceX, the aerospace manufacturer specializing in space travel.
+REWIND
+JSON, JavaScript Object Notation, is a data format that sorts and presents data in the form of key-value pairs. It looks much like a Python dictionary and can be traversed through using dot notation.
+
+Let's first take a look at Roza's index.html file:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SpaceX API</title>
+</head>
+<body>
+  <h1>Open the console!</h1>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
+  <script src="spaceX.js"></script>
+</body>
+</html>
+Like Plotly, theD3.js library is downloaded from its CDN link, and loaded into the HTML file. The code Roza writes will be in spaceX.js.
+
+Next, open spaceX.js.
+
+const url = "https://api.spacexdata.com/v2/launchpads";
+
+d3.json(url).then(receivedData => console.log(receivedData));
+The actual API call to SpaceX is made in these two lines of code:
+
+In the first line, the URL to the SpaceX is defined.
+In the second line, d3.json() method places a call to SpaceX's API, retrieves the data, and prints it to the browser console.
+The d3.json() returns a JavaScript promise: it places an API call to the URL and executes subsequent lines of code only when the API call is complete. Once the data is retrieved, it is assigned the arbitrary parameter name receivedData by the arrow function and printed in the console. The d3.json().then() method ensures that the data is received before executing the arrow function. In summary, a JavaScript promise in this case waits for the data retrieval to finish before moving on to the next code.
+
+
+
+REWIND
+JavaScript is an asynchronous language, meaning that a code statement doesn't necessarily wait for the previous statement to finish executing. When a statement involves a task that can take a relatively long time to complete, such as reading large files or retrieving data from an API, the next statement of code can begin executing before the previous task finishes. Using a promise with the then() method ensures that all the data requested from the API is received before executing the next part of code.
+
+Results from the API call to SpaceX, as shown in the Chrome
+console.
+
+We can see that an array of six objects is returned. Each object contains details about a specific SpaceX launch site, such as the number of space vehicles that have been successfully launched from the site.
+
+
+
+The details of each location, as you have just seen, are enclosed within a JavaScript object. Its properties can therefore be accessed with the dot notation. The code to retrieve the full_nameof the Vandenberg Air Force Base would look like this:
+
+d3.json(url).then(spaceXResults => console.log(spaceXResults[0].full_name));
+Note also that the value for the location key is an object: 
+
+The value for the location key is an
+object.
+
+
+
+SKILL DRILL
+Use map() to print only the latitude and longitude coordinates of each SpaceX launch station.
+
+# 12.3.2
+Load a JSON file with D3.json()
+Roza is now ready to load the belly button data into her script. First, she needs to download the data file to her computer. She'll then use two things to read the data file: the D3.js library and a local server.
+To download the zip file containing the data file, use the following link.
+
+Download the data (Links to an external site.)
+
+Recall the previous syntax used to place an API call:
+
+const url = "https://api.spacexdata.com/v2/launchpads";
+d3.json(url).then();
+Here, the URL string is received by d3.json() as an argument. The d3.json() method then retrieves the data from the address specified by the URL. After the data is fully retrieved, the function inside the then()method is executed.
+
+The syntax used to retrieve data from an external data file, instead of a web API, is the same:
+
+d3.json("samples.json").then(function(data){
+    console.log("hello");
+});
+When we open the browser, however, nothing is printed to the console. We get this error message:
+
+Console message alerting a CORS
+issue.
+
+What gives? What is a CORS request?
+
+The short explanation is that, for security reasons, a local server must be run when loading an external file into a JavaScript script file. If you don't understand these security issues right now, don't worry. We will come back to it later.
+
+To load the page, navigate to the directory where samples.json and index.html, as well as the script file, plots.js, are located. Open the command line (Terminal or Git Bash) and type the following:
+
+python -m http.server
+You should see the following message in the command line:
+
+Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+127.0.0.1 - - [30/Oct/2019 13:23:53] "GET / HTTP/1.1" 304 -
+Navigate to the given port number in your browser: localhost:8000. When you do this, you'll see the following screen:
+
+View of the browser when you navigate to the given port number:
+localhost:8000.
+
+IMPORTANT
+When reading an external data file such as a CSV or JSON file into a script, you must run a server. You cannot directly open index.htmlwith your browser.
+
+SKILL DRILL
+Repeat the following steps:
+
+Create a directory on your computer and copy the file samples.json into it.
+Create index.html and plots.js files.
+Be sure to import D3.js via a CDN in your HTML file.
+Use d3.json()to read samples.json into your script.
+Print a simple message to your browser console.
+Run python -m http.server and open your browser to the port address (likely 8000).
+You're now prepared to help Roza read and parse the actual data. Modify the code to change the printed console message from a simple "hello" to the entire dataset:
+
+d3.json("samples.json").then(function(data){
+    console.log(data);
+});
+Then examine the results in the browser console:View of the Chrome console showing data retrieved from an external
+JSON file, printed to the browser
+console.
+
+The data is structured as an object that contains three keys at the top level: metadata, names, and samples. Each of these keys is associated with an array that contains 153 elements.
+
+Let's look at each array in more detail. Click on the arrows successively to list the details of the first person:Clicking on the arrows in the browser console expands the displayed
+results.
+
+The metadata array contains objects, each of which contains details of a volunteer, such as age, location, ethnicity, ID number, and weekly washing frequency of the belly button.
+
+
+
+
+
+
+
+Now let's examine the rest of the dataset. Looking at the image below, we can see that names is simply an array of the ID numbers of the volunteers. Even though this information is included in the metadata array, the names array may be useful in rapidly retrieving an ID number when creating a plot.
+
+The names array contains the ID
+numbers.
+
+Next, check out the samples array and inspect the first element.
+
+Chrome console - Inspecting the first element in the samples
+array.
+
+The array's first element is an object, with four key-value pairs. Note the following:
+
+The id key identifies the ID number.
+The otu_ids property is an array of the ID numbers of all the bacteria found in this person's navel. OTU stands for Operational Taxonomic Unit, and here it means species or bacterial type. In this instance, there were 80 bacterial types with distinct ID numbers.
+The sample_values array contains the corresponding species name for each bacterial ID number. Some bacterial species have different ID numbers, but are clumped together under the same otu_label.
+In her final visualization of the belly button data, Roza would like to be able to select an individual from a dropdown menu. Once a person's ID number is selected, she would like to display the demographic information of that individual. Since each individual is represented by an object, she'll need to access both keys and values inside an object in order to do this.
+
+REWIND
+The Object.entries() method allows access to both an object's keys and values. It returns each key-value pair as an array.
+
+
+
+REWIND
+The forEach()method allows access to each element of an array.
+
+
+
+Now test your skills in the following Skill Drill:
+
+SKILL DRILL
+Use Object.entries()and forEach() to print all the metadata of the first person in the samples.json() dataset (ID 940).
+
+Roza has made a definite step forward. With the following code, we can display the metadata of any individual from the dataset:
+
+d3.json("samples.json").then(function(data){
+    firstPerson = data.metadata[0];
+    Object.entries(firstPerson).forEach(([key, value]) =>
+      {console.log(key + ': ' + value);});
+});
+In this case, we are extracting the metadata of the first person in the dataset, as indicated by the zero index position in metadata[0]. We then use the Object.entries() method to return each key-value pair in an array, and the forEach()method to access each element of these pairs.
+
+Open the browser console to see the results:The results of the forEach() operation displayed in the Chrome
+console
+
+Here, we manually specify the individual by the index position. Ultimately, we need to be able to choose an ID number from a dropdown menu and then display the metadata associated with that ID.
+
+# 12.3.3
+Handle CORS Errors
+Earlier, Roza discovered that she couldn't simply read in an external JSON dataset into her JavaScript file. Instead, she was required to run a local server. She wants to understand more about the CORS error message she came across, and why she must run a server to bypass it.
+When Roza first began to learn to use Plotly, the data used to create charts were contained in the JavaScript file. She was able to open index.html directly in her browser and see the graphs. Likewise, when she made a call to the SpaceX API, she was able to open index.html directly in her browser.
+
+However, when she attempted to read data from an external JSON file, she encountered an error:
+
+Console message alerting a CORS
+issue.
+
+To bypass this CORS error message, we navigated to the directory where index.html is located and ran python -m http.server in the CLI.
+
+CORS stands for Cross-Origin Resource Sharing. In short, browsers by default do not permit reading of resources from multiple sources. This restriction is in place because of security concerns.
+
+To better understand the issue, we first need to define servers. A server is a program or device that performs actions such as processing and sharing data. Our discussion will be limited to servers in the sense of software programs.
+
+A Flask app, for example, is a server program that processes and shares data. Likewise, when we place a call to the SpaceX API, there is a server behind the scenes that processes and shares the requested data. Another example is when a user logs in on a website, the server receives the user's information, compares it against information in its database, and approves or denies the login attempt.
+
+This is called a request-response model. The user (also known as the client) sends a request to the webpage server. The server, in turn, sends the requested data in response.
+
+Web browsers, for security reasons, heavily restrict reading from, and writing to, local files. If access to local files was allowed, remote sites would be allowed to read and manipulate your private data. Or simply opening a local file with the browser could trigger a malicious script that transmits your data across the internet. This is why we're unable to read a JSON file directly.
+
+However, running a static server, or python -m http.server in our case, allows us to skirt this restriction. Python's HTTP server provides a web address for both the JSON and HTML files to avoid these security issues.
+
+Now let's return to the browser error message: URL scheme must be 'http' or 'https' for CORS request. This means that the browser can request external data only through the HTTP/HTTPS protocols. In other words, the CORS policy, by default, does not allow data to come in through channels other than through HTTP or HTTPS. Furthermore, the origin of the data must be from a single source, unless specified by CORS.
+
+Here is a concrete example of how CORS works. Suppose that you navigate to a news website, and you are served an ad from adspamnetwork.com. If you happen to be logged into PayPal, and if these browser restrictions weren't in place, the JavaScript code in the ad might make an API call to PayPal and make unauthorized transactions. For this reason, browsers restrict a server from one site (adspamnetwork.com in this case) from making a request to a server from a different site (paypal.com) unless it has been given explicit permission.
+
+How, then, does a website such as ebay.com make API calls to PayPal? The browser generally makes a preflight request to the server, which verifies whether the browser's origin is allowed to make a request to it. The preflight request also includes other details, such as the types of requests permitted to be made, and the types of files permitted to be transferred. Then a request is made. The code on PayPal's server contains a CORS header that explicitly permits ebay.com to make API requests.
+
+NOTE
+For more information about CORS, see the MDN documentation (Links to an external site.).
+
+Which of the following files is the browser restricted from accessing by default?
+
+citydata.csv
+
+Correct. Nice work! By default, a browser will not be able to access a CSV file. This restriction can be bypassed by running a local server to give the CSV the same web address as the HTML, CSS, and JavaScript files.
+
+# 12.4.1
+JavaScript Event Listeners
+Roza is getting closer to her goal. Let's summarize what she has learned so far.
+
+She is able to create various types of static visualizations with Plotly, such as bar and line charts.
+
+She is also able to perform sophisticated data manipulations under the hood. She can retrieve data from an external JSON file, iterate through objects and retrieve necessary data from them, whether they are object keys or object values. She can also iterate through arrays with methods such as map() and filter().
+
+The missing link between the static visualizations and under-the-hood JavaScript data operations is interactivity. It is interactivity that will enable Roza to generate customizable charts dynamically. In order to make interactive visualizations, she'll first need to create JavaScript event listeners.
+First we'll help Roza create a very simple dropdown menu, and then build on our skills. Let's look at the contents of the index.html:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Events</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+  <div id="menu"></div>
+  <select id="selectOption">
+    <option value="option1">First Option</option>
+    <option value="option2">Second Option</option>
+  </select>
+<script src="script.js"></script>
+</body>
+</html>
+Note the following:
+
+This time, there are links to two CDNs: D3 and Plotly.
+The <select> tag indicates a dropdown menu. Its id is "selectOption".
+The dropdown menu has two options, as indicated by the two <option> tags.
+The option values "option1" and "option2" are internal names for each dropdown menu option.
+First Option and Second Option are the text displayed in the browser for each menu option.
+A plc tag links to script.js, a JavaScript file.
+REWIND
+The <select> tag is used to create a dropdown menu. The <option> tag is used to create each menu option.
+
+Now open script.js:
+
+d3.selectAll("body").on("change", updatePage);
+
+function updatePage() {
+  var dropdownMenu = d3.selectAll("#selectOption").node();
+  var dropdownMenuID = dropdownMenu.id;
+  var selectedOption = dropdownMenu.value;
+
+  console.log(dropdownMenuID);
+  console.log(selectedOption);
+};
+The first line uses the d3.selectAll() method to create an event listener. Whenever there is a change to the HTML body, the updatePage()function is called. That is, when an event occurs on the page, such as selection of a dropdown menu option, the updatePage() function is triggered.
+
+REWIND
+d3.selectAll().on("change", ); creates an event listener that triggers the custom function every time a change takes place to the HTML element specified by selectAll().
+
+Let's look at the updatePage()function in greater detail:
+
+Annotated JavaScript code for the updatePage function. The variable dropdownMenu creates an event listener for the dropdown menu. The variable dropdownMenuID selects the dropdown menu element. The variable selectedOption captures the value of the selected dropdown menu item.
+
+The function uses d3.selectAll() to select the dropdown menu, which has an id of selectOption.
+The id of the dropdown menu, selectOption, is assigned the variable dropdownMenuID.
+Whenever a dropdown menu option is selected, its value is assigned the variable selectedOption. Note that selectOption is the id value of the dropdown menu, while selectedOption is the option that is chosen by the user.
+Each time updatePage() is triggered, the id value of the dropdown menu, as well as the value of the chosen menu option, are printed to the browser console.
+When we open the browser, we'll see a dropdown menu with two options.Dropdown menu of First Option and Second Option displayed in the
+browser.
+
+If we open the console, we'll see that every time we toggle between the two menu options, selectOption and the option value are printed to the console:Menu options printed to the console when a user toggles between the
+two menu
+options.
+
+
+
+Now test your skills in the following Skill Drill.
+
+SKILL DRILL
+Create a new directory, containing new index.html and script.js files. Use the D3.js library to create an event listener for a dropdown menu.
+
+Your dropdown menu should contain the following names: Mickey, Minnie, Donald, Goofy. When a character (e.g., Minnie) is chosen from the dropdown menu by a user, the character's name should be printed to the browser console.
+
+# 12.4.2
+Create a Dynamic Plotly Chart
+Having become more comfortable with using an event listener with a dropdown menu, Roza is now ready to create a dynamic chart in Plotly.
+
+She'll now create a dynamic line chart: there will be a dropdown menu in the browser with two options. When an option is selected, the browser will display the graph for the dataset associated with that option.
+
+This skill will help Roza with a major task in her project: to create a dashboard in which her volunteers can select their anonymized ID from a dropdown menu in the browser in order to display information about their belly button critters.
+We'll first help Roza create a simple dynamic line chart in Plotly. As before, we'll create an index.html page with the appropriate links to CDNs and a JavaScript file (plots.js). The page also has a dropdown menu with an id of dropdownMenu:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Events</title>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+  <div id="plot"></div>
+  <select id="dropdownMenu">
+    <option value="dataset1">DataSet1</option>
+    <option value="dataset2">DataSet2</option>
+  </select>
+  <script src="plots.js"></script>
+</body>
+</html>
+Take a moment to examine plots.js in detail:
+
+function init() {
+  data = [{
+    x: [1, 2, 3, 4, 5],
+    y: [1, 2, 4, 8, 16] }];
+  Plotly.newPlot("plot", data);
+};
+
+d3.selectAll("#dropdownMenu").on("change", updatePlotly);
+function updatePlotly() {
+  var dropdownMenu = d3.select("#dropdownMenu");
+  var dataset = dropdownMenu.property("value");
+
+  var xData = [1, 2, 3, 4, 5];
+  var yData = [];
+
+  if (dataset === 'dataset1') {
+    yData = [1, 2, 4, 8, 16];
+  };
+
+  if (dataset === 'dataset2') {
+    yData = [1, 10, 100, 1000, 10000];
+  };
+
+  var trace = {
+    x: [xData],
+    y: [yData],
+  };
+  Plotly.restyle("plot", trace);
+};
+
+init();
+The first function to execute is init(), which renders the initial visualization:
+
+function init() {
+  data = [{
+    x: [1, 2, 3, 4, 5],
+    y: [1, 2, 4, 8, 16] }];
+  Plotly.newPlot("plot", data);
+};
+init();
+In this part of the code, a simple line chart, with x and y axes, is rendered with Plotly.newPlot(). By default, when a user opens index.html in a browser, this is the chart that is displayed:
+
+Default chart displayed when index.html is
+opened.
+
+Notice, however, that there is a dropdown menu, and that the visualization changes when the DataSet2 option is selected:Selecting DataSet2 from the dropdown menu displays the associated
+chart.
+
+
+
+When the user first loads the page, init() is called, and the initial plot is rendered. However, when the user selects a dropdown menu option, the updatePlotly() function is called:
+
+d3.selectAll("#dropdownMenu").on("change", updatePlotly);
+Specifically, through the d3.selectAll() function, when a change takes place to the HTML DOM element with the id of dropdownMenu, the upDatePlotly() function is triggered.
+
+Let's now dissect the updatePlotly() function:
+
+function updatePlotly() {
+  var dropdownMenu = d3.select("#dropdownMenu");
+  var dataset = dropdownMenu.property("value");
+
+  var xData = [1, 2, 3, 4, 5];
+  var yData = [];
+
+  if (dataset === 'dataset1') {
+    yData = [1, 2, 4, 8, 16];
+  };
+
+  if (dataset === 'dataset2') {
+    yData = [1, 10, 100, 1000, 10000];
+  };
+
+  var trace = {
+    x: [xData],
+    y: [yData],
+  };
+
+  Plotly.restyle("plot", trace);
+};
+The variable dropdownMenu is assigned to the DOM element with the id of dropdownMenu. Recall that it's the dropdown menu from index.html:
+
+<select id="dropdownMenu">
+  <option value="dataset1">DataSet1</option>
+  <option value="dataset2">DataSet2</option>
+</select>
+The variable dataset is assigned to the value of the dropdown menu option selected by the user. Here, it is either "dataset1"or "dataset2".
+
+The rest of updatePlotly() function is concerned with switching between two datasets:
+
+updatePlotly() function enables switching between two datasets (xData
+and
+yData).
+
+Let's break down this code:
+
+The x-axis values, or xData, remain the same. However, the y-axis values, or yData, depend on which dropdown menu option was selected. yData is initially a blank array.
+If the value of the dropdown menu option is 'dataset1', yData is assigned an array of integers. If 'dataset2' is chosen, another array of integers is assigned to yData.
+The xData and yData arrays are assembled inside the trace object. Unlike the Plotly.newPlot() method, thePlotly.restyle() method defaults to accepting an object (trace in this case) as its data argument, rather than an array.
+The Plotly.restyle() method is used to re-render the page on the browser. This method is more efficient than calling the Plotly.newPlot() method, as it does not create a brand new chart from scratch, but instead modifies the previously displayed chart with the updated information.
