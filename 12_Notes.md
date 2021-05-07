@@ -1164,3 +1164,70 @@ Open VS Code and modify the buildMetadata() function to populate the Demographic
 data-12-4-3-7-screenshot-of-the-completed-demographic-info-panel.png
 
 Great job! Roza is now well-placed to complete the rest of the dashboard.
+
+# 12.5.1
+Deploy the Project to GitHub Pages
+Roza has come a long way. She's learned to create attractive charts in Plotly, as well as use JavaScript to make these charts dynamic and customizable. Furthermore, Roza has learned how to filter the belly button dataset and to display information specific to each volunteer.
+
+Roza also knows about cross-origin resource restrictions on browsers, and understands that a server app must give the same web address to the data file as well as the associated HTML, CSS, and JavaScript files.
+
+Once Roza completes the belly button data dashboard, she'll have one major task left: sharing it with the rest of the world. Running a local server allows Roza to test her code on the specific computer, but deploying her project onto a public server enables her to share it with her colleagues as well as the study participants. Let's help Roza with the steps necessary to complete this step.
+We will deploy a sample project to GitHub Pages. Click below to download the project files.
+
+Download the data files (Links to an external site.)
+
+We have previously used GitHub to make our code available to the public and to work on projects collaboratively. GitHub offers a free service called GitHub Pages to deploy projects like Roza's—that is, to run code on a GitHub server to make it viewable to the public. Without a server, anyone who wants to view Roza's dashboard would need to download the project files and run a local server, such as Python's HTTP server.
+
+We'll deploy a sample project (the code you just downloaded) to GitHub Pages. Behind the scenes, GitHub Pages runs a server app for your project, much like Python's HTTP server. However, whereas the local Python server makes the dashboard available only for the user of the specific computer on which it is run, GitHub Pages makes it available to anyone with an internet connection and a web browser. First, we'll use the sample project code to walk through the steps of deploying a project to GitHub Pages. Then we'll repeat these steps to deploy the belly button dashboard.
+
+First, to create a new repository on GitHub, navigate to https://github.com/ (Links to an external site.). Click the arrow next to your profile icon, and then select "Your repositories."
+
+Navigate to github.com, and then click a dropdown menu and select
+"Your
+repositories."
+
+Select the option to make the repository public:
+
+Select the option to make the repository
+public.
+
+Next, clone the repository by copying the URL:
+
+Copy the repository URL from
+GitHub.
+
+Type git clone in the command line and press Enter.
+
+Clone the GitHub repository on a local
+machine.
+
+Next, push the project to GitHub by following these steps:
+
+In the command line, navigate to the newly created repository directory.
+Copy and paste the HTML, JavaScript, and JSON files that you downloaded into the repository.
+In the command line, run git add .
+Run git commit -m "".
+Run git push origin main.
+Then navigate to your project page on GitHub and click on Settings to configure for deployment:
+
+Navigate to the Settings tab on GitHub repository
+page.
+
+Scroll down the Settings page to the GitHub Pages menu. Select "main branch" from the dropdown menu, and then click Save.
+
+data-12-5-1-6-select-master-branch-from-the-menu.png
+
+The project should now be deployed to GitHub Pages. You can confirm this by checking that the URL of the deployed page is listed under the GitHub Pages options. You can also navigate to the URL of the deployed page, which will be in this format: <your account name>.github.io/<your repository name>. For example, if your GitHub account name is data_student, and you named your repository plotly_chart, the URL of the deployed page would be data_student.github.io/plotly_chart.
+
+Here is a video of the previous steps:
+
+
+
+This is what you should see when you navigate to the URL:
+
+Deployed Plotly chart on GitHub
+Pages
+
+Congratulations! You have now successfully deployed a project to GitHub Pages. Now the entire world will be able to access your data visualizations and insights. You've acquired a broad range of skills, from using Plotly to create visualizations to deploying them on the web. You are now ready to take on the challenge.
+
+© 2020 - 2021 Trilogy Education Services, a 2U, Inc. 
