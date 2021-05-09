@@ -39,7 +39,7 @@ function buildMetadata(sample) {
     var PANEL = d3.select("#sample-metadata");
 
     // Use `.html("") to clear any exisiting metadata
-    PANEL.HTML("");
+    PANEL.html("");
 
     // Use `Object.entries` to add each key and value pair to the panel
     // Hint: Inside the loop, you will need to use d3 to append new
