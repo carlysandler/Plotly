@@ -1,0 +1,39 @@
+body{
+	background-color: cornflowerblue;
+}
+.jumbotron{
+	background: url('../images/backgroundImage.jpg');
+	min-height: 250px;
+	background-size: cover;
+}
+
+.custom-panel{
+	margin-top: 60px;
+}
+.panel-primary{
+	border-color:ghostwhite;
+}
+.panel-primary>.panel-heading{
+	background-color: rgb(39, 38, 38);
+	border-color: ghostwhite;
+}
+
+.panel-body {
+	background-color:cornflowerblue;
+}
+
+.banner-text h1{
+	font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+	color: ghostwhite;
+	font-size: 50px;
+	letter-spacing: 10px;
+	font-weight: bolder;
+}
+
+.banner-text p{
+	color: ghostwhite;
+	font-size: 16px;
+	font-weight: boldS;
+	letter-spacing: 5px;
+	text-transform: uppercase;
+}
