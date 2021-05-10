@@ -1,5 +1,5 @@
 body{
-	background-color: cornflowerblue;
+	background-color:#e6e496;
 }
 .jumbotron{
 	background: url('../images/backgroundImage.jpg');
@@ -19,7 +19,7 @@ body{
 }
 
 .panel-body {
-	background-color:cornflowerblue;
+	background-color:ghostwhite;
 }
 
 .banner-text h1{

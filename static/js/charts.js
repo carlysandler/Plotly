@@ -54,7 +54,7 @@ function buildMetadata(sample) {
 // 1. Create the buildCharts function.
 function buildCharts(sample) {
   // 2. Use d3.json to load and retrieve the samples.json file 
-  d3.json("../data/samples.json").then((data) => {
+  d3.json("samples.json").then((data) => {
     // 3. Create a variable that holds the samples array. 
     var samples = data.samples;
     // 4. Create a variable that filters the samples for the object with the desired sample number.
@@ -64,7 +64,7 @@ function buildCharts(sample) {
     // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
     var ids = result.otu_ids;
     var labels = result.otu_labels.slice(0, 10).reverse();
-    var values = result.sample_values.slice(0, 10).reserve();
+    var values = result.sample_values.slice(0, 10).reverse();
 
     var bubbleLabels = result.otu_labels;
     var bubbleValues = result.sample_values;
@@ -78,7 +78,7 @@ function buildCharts(sample) {
 
     // 8. Create the trace for the bar chart. 
     var barData = [{
-      x: xvalues,
+      x: values,
       y: yticks,
       type: "bar",
       orientation: "h",
@@ -89,7 +89,7 @@ function buildCharts(sample) {
       title: "Top 10 Bacteria Cultures Found"
     };
     // 10. Use Plotly to plot the data with the layout. 
-    Plotly.newplot("bar", barData, barLayout);
+    Plotly.newPlot("bar", barData, barLayout);
   
     // DELIVERABLE 2: Create a Bubble Chart
     // 1. Create the trace for the bubble chart.
@@ -119,7 +119,7 @@ function buildCharts(sample) {
 // DELIVERABLE 3: Create a Gauge Chart
     
     // 1. Crate a variable that filters the metadata for the array object with the matching ID property passed in buildCharts()
-    var metadata = data.metdata;
+    var metadata = data.metadata;
     var gaugeArray = metadata.filter(metaObj => metaObj.id == sample);
 
     // 2. Create a variable that holds the first sample of the filterd array
@@ -142,8 +142,8 @@ function buildCharts(sample) {
           { range: [0, 2], color: "red" },
           { range: [2, 4], color: "orange" },
           { range: [4, 6], color: "yellow" },
-          { range: [6, 8], color: "green" },
-          { range: [8, 10], color: "blue" },
+          { range: [6, 8], color: "lightgreen" },
+          { range: [8, 10], color: "green" },
         ],
         dtick: 2
       }
