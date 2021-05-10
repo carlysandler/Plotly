@@ -10,5 +10,4 @@ Visit Dashboard here: https://carlysandler.github.io/Plotly/
 - Deliverable 3: Create a Cauge Chart
 - Deliverble 4: Customize the Dashboard
 
-
-<img width="1128" alt="browser" src="https://user-images.githubusercontent.com/77628698/117595228-3d3d0600-b10e-11eb-92db-12a157ce3e0a.png">
+<img width="472" alt="browser" src="https://user-images.githubusercontent.com/77628698/117595310-7b3a2a00-b10e-11eb-8b76-c3e896c631f9.png">
